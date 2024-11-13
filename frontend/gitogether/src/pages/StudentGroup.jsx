@@ -24,7 +24,7 @@ const columns = [
 const StudentGrouping = () => {
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
-  const [selectedStudents, setSelectedStudents] = useState([]);
+  const [selectedStudentIds, setSelectedStudentIds] = useState([]); // Array for selected IDs
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -64,11 +64,22 @@ const StudentGrouping = () => {
   }, [searchQuery, students]);
 
   const handleSelectionChange = (newSelection) => {
-    setSelectedStudents(newSelection);
+    setSelectedStudentIds((prevSelected) => {
+      // Add or remove IDs based on the new selection
+      const updatedSelected = [...prevSelected];
+      newSelection.forEach(id => {
+        if (updatedSelected.includes(id)) {
+          updatedSelected.splice(updatedSelected.indexOf(id), 1); // Deselect
+        } else {
+          updatedSelected.push(id); // Select
+        }
+      });
+      return updatedSelected;
+    });
   };
 
   const handleCreateGroup = () => {
-    if (selectedStudents.length < 2 || selectedStudents.length > 3) {
+    if (selectedStudentIds.length < 2 || selectedStudentIds.length > 3) {
       setError('Please select 2-3 students to create a group');
       return;
     }
@@ -84,7 +95,7 @@ const StudentGrouping = () => {
     setIsLoading(true);
     try {
       const updatedStudents = students.map(student => {
-        if (selectedStudents.includes(student.id)) {
+        if (selectedStudentIds.includes(student.id)) {
           return { ...student, group_name: groupName };
         }
         return student;
@@ -92,7 +103,7 @@ const StudentGrouping = () => {
 
       const groupData = {
         teamName: groupName,
-        members: selectedStudents.map(id => {
+        members: selectedStudentIds.map(id => {
           const student = students.find(s => s.id === id);
           return {
             name: student.name,
@@ -109,7 +120,7 @@ const StudentGrouping = () => {
       setStudents(updatedStudents);
       setFilteredStudents(updatedStudents);
       setSuccessMessage(`Group "${groupName}" created successfully!`);
-      setSelectedStudents([]);
+      setSelectedStudentIds([]);
       setGroupName('');
       setIsDialogOpen(false);
 
@@ -138,33 +149,32 @@ const StudentGrouping = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{ marginBottom: '10px', width: '100%' }}
           sx={{
-          width: '100%', // Full width for the TextField
-          '& .MuiInputLabel-root': {
-            color: '#d91656', // Label color
-            '&.Mui-focused': {
-              color: '#d91656', // Change label color when focused
+            width: '100%', // Full width for the TextField
+            '& .MuiInputLabel-root': {
+              color: '#d91656', // Label color
+              '&.Mui-focused': {
+                color: '#d91656', // Change label color when focused
+              },
             },
-          },
-          '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: '#d91656', // Outline color
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: '#d91656', // Outline color
+              },
+              '&:hover fieldset': {
+                borderColor: '#d91656', // Outline color on hover
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#d91656', // Outline color when focused
+              },
             },
-            '&:hover fieldset': {
-              borderColor: '#d91656', // Outline color on hover
+            '& .MuiInputBase-input': {
+              color: 'white', // Input text color
             },
-            '&.Mui-focused fieldset': {
-              borderColor: '#d91656', // Outline color when focused
-            },
-          },
-          '& .MuiInputBase-input': {
-            color: 'white', // Input text color
-          },
-        }}
+          }}
         />
         <Button
           variant="contained"
           onClick={handleCreateGroup}
-          disabled={selectedStudents.length < 2 || selectedStudents.length > 3}
           style={isMobile ? styles.mobileButton : { marginLeft: '20px' }}
         >
           Create Group
@@ -193,7 +203,9 @@ const StudentGrouping = () => {
           checkboxSelection
           isRowSelectable={isRowSelectable}
           onRowSelectionModelChange={handleSelectionChange}
-          selectionModel={selectedStudents}
+          selectionModel={selectedStudentIds.filter(id => 
+            filteredStudents.some(student => student.id === id)
+          )} // Only show selected rows that are visible
           sx={{
             border: 0,
             '& .grouped-row': {
@@ -213,31 +225,31 @@ const StudentGrouping = () => {
       </Paper>
 
       <Dialog
-      open={isDialogOpen}
-      onClose={() => setIsDialogOpen(false)}
-      maxWidth="md" // Set the maximum width of the dialog
-      fullWidth // Ensure the dialog takes up the full width
-    >
-      <DialogTitle>Create New Group</DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          label="Group Name"
-          type="text"
-          fullWidth
-          value={groupName}
-          onChange={(e) => setGroupName(e.target.value)}
-        />
-        <div style={{ marginTop: '10px' }}>
-          <strong>Selected Students:</strong>
-          <ul>
-            {selectedStudents.map(id => {
-              const student = students.find(s => s.id === id);
-              return <li key={id}>{student?.name} ({student?.roll_no})</li>;
-            })}
-          </ul>
-        </div>
-      </DialogContent>
+        open={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        maxWidth="md" 
+        fullWidth
+      >
+        <DialogTitle>Create New Group</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            label="Group Name"
+            type="text"
+            fullWidth
+            value={groupName}
+            onChange={(e) => setGroupName(e.target.value)}
+          />
+          <div style={{ marginTop: '10px' }}>
+            <strong>Selected Students:</strong>
+            <ul>
+              {selectedStudentIds.map(id => {
+                const student = students.find(s => s.id === id);
+                return <li key={id}>{student?.name} ({student?.roll_no})</li>;
+              })}
+            </ul>
+          </div>
+        </DialogContent>
         <DialogActions>
           <Button onClick={() => setIsDialogOpen(false)}>Cancel</Button>
           <Button 
