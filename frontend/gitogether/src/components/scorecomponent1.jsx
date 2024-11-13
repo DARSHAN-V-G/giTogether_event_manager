@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField, Button, Grid, Container, Typography } from '@mui/material';
 import axios from 'axios';
 
-const ScoreComponent1 = ({ scoreType }) => {
+const ScoreComponent1 = ({ scoreType, calculationType }) => {
     const [teams, setTeams] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [score1, setScore1] = useState('');
     const [score2, setScore2] = useState('');
-    
+
     useEffect(() => {
         // Fetch teams data from the backend
         const fetchTeams = async () => {
@@ -28,14 +28,21 @@ const ScoreComponent1 = ({ scoreType }) => {
             return;
         }
 
-        // Calculate the average of the two scores
-        const averageScore = (Number(score1) + Number(score2)) / 2;
+        // Calculate score based on calculationType
+        let finalScore;
+        if (calculationType === 'average') {
+            // Calculate the average of the two scores
+            finalScore = (Number(score1) + Number(score2)) / 2;
+        } else if (calculationType === 'sum') {
+            // Calculate the sum of the two scores
+            finalScore = Number(score1) + Number(score2);
+        }
 
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/team/update/${selectedTeam._id}/score`;
             await axios.put(url, {
                 scoreType,
-                score: averageScore
+                score: finalScore
             });
             alert("Score updated successfully!");
             setScore1('');
@@ -49,7 +56,7 @@ const ScoreComponent1 = ({ scoreType }) => {
     return (
         <Container maxWidth="xs" style={{ textAlign: 'center', marginTop: '20px' }}>
             <Typography variant="h6" gutterBottom>
-                Update Score
+                {calculationType === 'average' ? 'Update  Score' : 'Update Total Score'}
             </Typography>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -57,7 +64,6 @@ const ScoreComponent1 = ({ scoreType }) => {
                         options={teams}
                         getOptionLabel={(option) => option.teamName}
                         onChange={(event, newValue) => {
-                            console.log('Selected Team:', newValue); // Log newValue to check its structure
                             setSelectedTeam(newValue);
                         }}
                         renderInput={(params) => <TextField {...params} label="Select Team" variant="outlined" />}
@@ -95,3 +101,4 @@ const ScoreComponent1 = ({ scoreType }) => {
 };
 
 export default ScoreComponent1;
+

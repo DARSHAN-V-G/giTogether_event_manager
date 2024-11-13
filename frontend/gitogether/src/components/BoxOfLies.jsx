@@ -2,6 +2,7 @@
 import React from 'react';
 import { Container, Typography, Paper, Box } from '@mui/material';
 import ScoreComponent from './ScoreComponent';
+import ScoreComponent1 from './scorecomponent1';
 
 const BoxOfLies = () => {
     return (
@@ -11,7 +12,7 @@ const BoxOfLies = () => {
                     Box of Lies Score
                 </Typography>
                 <Box mt={3}>
-                    <ScoreComponent scoreType="boxOfLiesScore" />
+                    <ScoreComponent1 scoreType="boxOfLiesScore" calculationType="sum" />
                 </Box>
             </Paper>
         </Container>

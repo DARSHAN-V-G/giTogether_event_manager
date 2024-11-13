@@ -11,7 +11,7 @@ const Marketing = () => {
         Marketing Score
     </Typography>
     <Box mt={3}>
-        <ScoreComponent1 scoreType="marketingScore" />
+        <ScoreComponent1 scoreType="marketingScore" calculationType="average" />
     </Box>
 </Paper>
 </Container>

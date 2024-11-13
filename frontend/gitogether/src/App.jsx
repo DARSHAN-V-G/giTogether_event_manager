@@ -8,6 +8,7 @@ import Speedrun from './components/Speedrun.jsx';
 import Marketing from './components/Marketing.jsx';
 import Score from './pages/scorePage.jsx';
 import TeamList from './pages/TeamList.jsx';
+import Mail from './components/mail.jsx';
 const App = () => {
   return (
     <div>
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/marketing" element={<Marketing />} />
           <Route path="/score" element={<Score />} />
           <Route path="/leaderboard" element={<TeamList />} />
+          <Route path="/mail" element={<Mail />} />
           </Routes>
       </BrowserRouter>
     </div>
