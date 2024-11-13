@@ -22,8 +22,8 @@ const Mail = () => {
   };
 
   return (
-    <div>
-      <button onClick={sendEmailsToAllTeams}>Send Emails to All Teams</button>
+    <div style={{display:'flex',width:'100vw',height:'100vh',justifyContent:'center',alignItems:'center'}}>
+      <button onClick={sendEmailsToAllTeams} className="btns" style={{width:'15rem',height:'4rem'}}>Send Emails to All Teams</button>
     </div>
   );
 };

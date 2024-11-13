@@ -130,9 +130,9 @@ const StudentGrouping = () => {
 
   return (
     <div style={styles.container}>
-      <Typography variant="h5" align="center" gutterBottom>
+      <p className="txt">
         Group Formation
-      </Typography>
+      </p>
 
       <div style={isMobile ? styles.mobileHeader : styles.header}>
         <TextField
@@ -140,7 +140,7 @@ const StudentGrouping = () => {
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ marginBottom: '10px', width: '80%' }}
+          style={{ marginBottom: '10px', width: '100%' }}
           sx={{
           width: '100%', // Full width for the TextField
           '& .MuiInputLabel-root': {
@@ -189,7 +189,7 @@ const StudentGrouping = () => {
         </Alert>
       )}
 
-      <Paper sx={{ height: 700, width:`${isMobile?'80%':'100%'}`, overflowX: 'auto' }}>
+      <Paper sx={{ height: 700, width:`${isMobile?'80%':'60%'}`, overflowX: 'auto' }}>
         <DataGrid
           rows={filteredStudents}
           columns={columns}
@@ -259,10 +259,11 @@ const StudentGrouping = () => {
 
 const styles = {
   container: {
-    padding: '10px',
-    maxWidth: '100vw',
+    width: '100vw',
     display:'flex',
     flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center',
     margin: '0 auto',
   },
   header: {

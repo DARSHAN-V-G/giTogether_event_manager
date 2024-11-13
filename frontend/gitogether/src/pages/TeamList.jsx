@@ -7,11 +7,11 @@ import TeamCard from '../components/TeamCard';
 
 const StyledContainer = styled(Container)`
   margin-top: 3rem;
-  width: 70%;
-  max-width: 1200px;
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content:center;
   background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
   border-radius: 1rem;
   padding: 2rem;
@@ -33,9 +33,9 @@ const StyledTitle = styled(Typography)`
 
 const StyledTeamContainer = styled.div`
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 2rem;
+  display: flex;
+  flex-direction:column;
+  gap:1rem;
 `;
 
 const StyledLoading = styled(CircularProgress)`
@@ -91,12 +91,10 @@ const TeamList = () => {
 
   return (
     <StyledContainer>
-      <StyledTitle variant="h4" gutterBottom>
-        Leaderboard
-      </StyledTitle>
-      <StyledTeamContainer>
-        {teams.map((team) => (
-          <TeamCard key={team._id} team={team} />
+      <p className="txt">Leaderboard</p>
+      <StyledTeamContainer style={{ alignItems: 'center' }}>
+        {teams.map((team, index) => (
+          <TeamCard key={team._id} team={team} rank={index + 1} />
         ))}
       </StyledTeamContainer>
     </StyledContainer>
