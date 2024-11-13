@@ -1,0 +1,47 @@
+.home-container{
+  width: 100%;
+  height:60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.btns{
+  background-color: rgb(243, 60, 91);
+  color: white;
+  height: 3rem;
+  width: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.header{
+  width: 100%;
+  height: 20%;
+  display: flex;
+}
+
+.txt{
+  font-size: 3rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  color: rgb(238, 46, 78);
+}
+
+.btns:hover{
+  color: white;
+  height: 3.5rem;
+  width: 10.5rem;
+}
+
+@media(max-width:576px){
+  .txt{
+    font-size: 2rem;
+  }
+}

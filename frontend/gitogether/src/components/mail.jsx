@@ -4,15 +4,15 @@ const Mail = () => {
   // Function to handle the email sending
   const sendEmailsToAllTeams = async () => {
     try {
-      const response = await fetch('http://localhost:5000/mail/send', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/mail/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         }
       });
-      
+
       const data = await response.json();
-      
+
       // Display a success message
       alert(data.message);
     } catch (error) {

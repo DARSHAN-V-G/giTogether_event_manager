@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css'
-import Database from './pages/ViewData.jsx';
+import HomePage from './pages/ViewData.jsx';
 import StudentGrouping from './pages/StudentGroup.jsx';
 import BoxOfLies from './components/BoxOfLies.jsx';
 import Speedrun from './components/Speedrun.jsx';
@@ -14,7 +14,7 @@ const App = () => {
     <div>
       <BrowserRouter>
           <Routes>
-          <Route path="/" element={<Database />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/group" element={<StudentGrouping />} />
           <Route path="/speedrun" element={<Speedrun />} />
           <Route path="/boxoflies" element={<BoxOfLies />} />
