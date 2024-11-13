@@ -7,16 +7,18 @@ import TeamCard from '../components/TeamCard';
 
 const StyledContainer = styled(Container)`
   margin-top: 3rem;
-  width: 90%;
+  width: 70%;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: transparent; // Set background to transparent
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
   border-radius: 1rem;
   padding: 2rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  border: 1px solid white; // Add 1px white border
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Semi-transparent border */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* Support for Safari */
 
   @media (max-width: 768px) {
     width: 95%;
@@ -90,7 +92,7 @@ const TeamList = () => {
   return (
     <StyledContainer>
       <StyledTitle variant="h4" gutterBottom>
-        LeaderBoard
+        Leaderboard
       </StyledTitle>
       <StyledTeamContainer>
         {teams.map((team) => (
