@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField, Button, Grid, Container, Typography } from '@mui/material';
 import axios from 'axios';
 
-const ScoreComponent = ({ scoreType }) => {
+const ScoreComponent1 = ({ scoreType }) => {
     const [teams, setTeams] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState(null);
-    const [score, setScore] = useState('');
-
+    const [score1, setScore1] = useState('');
+    const [score2, setScore2] = useState('');
+    
     useEffect(() => {
         // Fetch teams data from the backend
         const fetchTeams = async () => {
@@ -22,20 +23,23 @@ const ScoreComponent = ({ scoreType }) => {
     }, []);
 
     const handleSubmit = async () => {
-        if (!selectedTeam || !score) {
-            alert("Please select a team and enter a score.");
+        if (!selectedTeam || !score1 || !score2) {
+            alert("Please select a team and enter both scores.");
             return;
         }
-         
-        
+
+        // Calculate the average of the two scores
+        const averageScore = (Number(score1) + Number(score2)) / 2;
+
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/team/update/${selectedTeam._id}/score`;
             await axios.put(url, {
                 scoreType,
-                score: Number(score)
+                score: averageScore
             });
             alert("Score updated successfully!");
-            setScore('');
+            setScore1('');
+            setScore2('');
         } catch (error) {
             console.error("Error updating score:", error);
             alert("Failed to update score");
@@ -63,9 +67,19 @@ const ScoreComponent = ({ scoreType }) => {
                 <Grid item xs={12}>
                     <TextField
                         type="number"
-                        label="Score"
-                        value={score}
-                        onChange={(e) => setScore(e.target.value)}
+                        label="Score 1"
+                        value={score1}
+                        onChange={(e) => setScore1(e.target.value)}
+                        variant="outlined"
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        type="number"
+                        label="Score 2"
+                        value={score2}
+                        onChange={(e) => setScore2(e.target.value)}
                         variant="outlined"
                         fullWidth
                     />
@@ -80,4 +94,4 @@ const ScoreComponent = ({ scoreType }) => {
     );
 };
 
-export default ScoreComponent;
+export default ScoreComponent1;
