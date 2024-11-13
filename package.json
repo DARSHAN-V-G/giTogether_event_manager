@@ -1,0 +1,10 @@
+{
+  "scripts": {
+
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend/gitogether && npm run dev\"",
+    "install": "cd backend && npm install && cd ../frontend/gitogether && npm install"
+  },
+  "dependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
