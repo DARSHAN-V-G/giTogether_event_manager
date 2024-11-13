@@ -18,7 +18,7 @@ const postData = async (req, res) => {
       if (team.members && team.members.length > 0) {
         const firstMember = team.members[0];
         const recipientEmail = `${firstMember.roll_no.toLowerCase()}@psgtech.ac.in`;
-        
+
         const mailOptions = {
           from: process.env.EMAIL_ID, // Sender's email
           to: recipientEmail,
@@ -33,7 +33,12 @@ const postData = async (req, res) => {
               </head>
               <body>
                 <p>Hey 👋 ${firstMember.name},</p>
-                <p>Thank you for registering!</p>
+                <p>Below the links to the Github Repos for Github Speedrun</p>
+                <a href="https://github.com/GitHub-Campus-Club-PSGCT/Github_speedrun_path_1">Path 1</a>
+                <a href="https://github.com/GitHub-Campus-Club-PSGCT/Github_speedrun_path_2">Path 2</a>
+                <a href="https://github.com/GitHub-Campus-Club-PSGCT/github-speedrun-path-3">Path 3</a>
+                <a href="https://github.com/GitHub-Campus-Club-PSGCT/Github-Speedrun-Path-4">Path 4</a>
+                <p>Good luck, enjoy the challenge!</p>
               </body>
             </html>`
         };

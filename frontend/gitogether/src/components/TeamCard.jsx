@@ -1,28 +1,22 @@
 // src/components/TeamCard.jsx
 import React from 'react';
-import { Card, CardContent, Typography } from '@mui/material';
+import './TeamCard.css'
 
-const TeamCard = ({ team }) => {
+const TeamCard = ({ team ,rank}) => {
     const overallScore = team.speedrunScore + team.boxOfLiesScore + team.marketingScore;
     const firstMember = team.members[0] || {};
 
     return (
-        <Card sx={{ marginBottom: '20px', width: '600px' }}>
-            <CardContent>
-                <Typography variant="h5" component="div">
-                    Team Name: {team.teamName}
-                </Typography>
-                <Typography color="text.secondary">
-                    Captain Name: {firstMember.name}
-                </Typography>
-                <Typography color="text.secondary">
-                    Captain Roll No: {firstMember.roll_no}
-                </Typography>
-                <Typography variant="body2">
-                    Overall Score: {overallScore}
-                </Typography>
-            </CardContent>
-        </Card>
+       <>
+       <div className="maincard-container">
+       <p className="pos-text">{rank}</p>
+       <div className="card-container">
+        <p className="text" style={{fontSize:"2.3rem"}}>{team.teamName}</p>
+        <p className="text">{firstMember.name}</p>
+        <p className="text">Overall Score: {overallScore}</p>
+       </div>
+       </div>
+       </>
     );
 };
 

@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 const Score = () => {
     return (
         <div style={{ textAlign: 'center', marginTop: '50px', color:"rgb(243, 60, 91)" }}>
-            <h1>Team Scoring</h1>
-            <div className="container" style={{}}>
+            <h1 className="txt">Team Scoring</h1>
+            <div className="container" style={{display:'flex',width:'100%',alignItems:'center',justifyContent:'center',height:'70vh'}}>
                 <div style={{ marginBottom: '20px' }}>
                 <Link to="/speedrun">
-                    <button>Speedrun</button>
+                    <button className="btns">Speedrun</button>
                 </Link>
                 <Link to="/boxoflies" style={{ margin: '0 10px' }}>
-                    <button>Box of Lies</button>
+                    <button className="btns">Box of Lies</button>
                 </Link>
                 <Link to="/marketing">
-                    <button>Marketing</button>
+                    <button className="btns">Marketing</button>
                 </Link>
                 </div>
             </div>
