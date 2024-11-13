@@ -1,6 +1,6 @@
 // src/components/Marketing.jsx
 import React from 'react';
-import ScoreComponent from './ScoreComponent';
+import ScoreComponent1 from './scorecomponent1.jsx';
 import { Container, Typography, Paper, Box } from '@mui/material';
 const Marketing = () => {
     return (
@@ -11,7 +11,7 @@ const Marketing = () => {
         Marketing Score
     </Typography>
     <Box mt={3}>
-        <ScoreComponent scoreType="marketingScore" />
+        <ScoreComponent1 scoreType="marketingScore" />
     </Box>
 </Paper>
 </Container>
