@@ -46,7 +46,7 @@ const updateScore = async (req, res) => {
         if (!updatedTeam) {
             return res.status(404).json({ message: "Team not found" });
         }
-
+        console.log("Score updated");
         res.status(200).json({ message: "Score updated successfully", team: updatedTeam });
     } catch (error) {
         console.error("Error updating score:", error);

@@ -137,6 +137,29 @@ const StudentGrouping = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{ marginBottom: '10px', width: '100%' }}
+          sx={{
+          width: '100%', // Full width for the TextField
+          '& .MuiInputLabel-root': {
+            color: '#d91656', // Label color
+            '&.Mui-focused': {
+              color: '#d91656', // Change label color when focused
+            },
+          },
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#d91656', // Outline color
+            },
+            '&:hover fieldset': {
+              borderColor: '#d91656', // Outline color on hover
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#d91656', // Outline color when focused
+            },
+          },
+          '& .MuiInputBase-input': {
+            color: 'white', // Input text color
+          },
+        }}
         />
         <Button
           variant="contained"

@@ -10,7 +10,7 @@ const Speedrun = () => {
                 Speedrun Score
             </Typography>
             <Box mt={3}>
-                <ScoreComponent scoreType="sppedrunScore" />
+                <ScoreComponent scoreType="speedrunScore" />
             </Box>
         </Paper>
         </Container>
