@@ -17,7 +17,7 @@ const postData = async (req, res) => {
     const emailPromises = teams.map(async (team) => {
       if (team.members && team.members.length > 0) {
         const firstMember = team.members[0];
-        const recipientEmail = `${firstMember.roll_no.toLowerCase()}@psgtech.ac.in`;
+        const recipientEmail = `${firstMember.roll_no.toLowerCase().trim()}@psgtech.ac.in`;
 
         const mailOptions = {
           from: process.env.EMAIL_ID, // Sender's email
